@@ -78,3 +78,5 @@ with c2:
             st.write(sol['df_dif_' + lnp].transpose())
             st.write('PROLIFERACIÓN')
             st.write(sol['df_dif_perc_' + lnp].transpose())
+import shutil
+shutil.rmtree('Img')
