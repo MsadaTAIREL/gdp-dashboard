@@ -7,10 +7,12 @@ from aux_img import img_1, img_2
 from aux_preprocesado import preprocesado, preprocesado_columnas, bases_de_datos
 from aux_html import escribir_html
 st.set_page_config(page_title="Análisis eficiencia", layout="wide")
+import os
+from pathlib import Path
 
-
-img_file = '/workspaces/gdp-dashboard/Img'
-
+img_file = Path("\Img")
+if not img_file.exists():
+    os.makedirs(img_file)
 _,c1,c2,_ = st.columns([0.5, 1.5,4,0.5], gap = 'large')
 
 with c1:
