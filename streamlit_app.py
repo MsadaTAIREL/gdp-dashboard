@@ -9,7 +9,7 @@ from aux_html import escribir_html
 st.set_page_config(page_title="Análisis eficiencia", layout="wide")
 import os
 from pathlib import Path
-img_file = '\Img'
+img_file = 'Img'
 path = Path("Img")
 if not path.exists():
     os.makedirs(path)

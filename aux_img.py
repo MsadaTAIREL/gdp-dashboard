@@ -30,7 +30,7 @@ def img_1(fig, ax,sol, df0, lnp,img_file):
     ax[1].set_xticks(df_medios.index)
     ax[1].legend(['CT ('+lnp+')', 'SCT ('+lnp+')', 'RRM1 ('+lnp+')'], fontsize = 8)
     ax[1].set_title('Diferences Mean Values', size = 12)
-    fig.savefig(img_file+"\\"+'Valores_'+ lnp + '.png', bbox_inches='tight', pad_inches = 0)
+    fig.savefig(img_file+'/Valores_'+ lnp + '.png', bbox_inches='tight', pad_inches = 0)
 
 def img_2(fig, ax,sol, lnp,img_file, colores = {'r':'#bf775f', 'o':'#d3a65f',  'y':'#e6d26b','g':'#8bac86', 'c':'#98cacd','b':'#709acd', 'p':'#8176a7',  'gr': '#444444'}):
     df_dif = sol['df_dif_'+lnp]
@@ -43,4 +43,4 @@ def img_2(fig, ax,sol, lnp,img_file, colores = {'r':'#bf775f', 'o':'#d3a65f',  '
     ax.set_ylim(0,150)
     ax.legend(['CT ('+lnp+')', 'SCT ('+lnp+')', 'RRM1 ('+lnp+')'], fontsize = 8)
     ax.set_xticks(df_dif_perc.index)
-    fig.savefig(img_file+"\\"+'proliferacion_'+lnp + '.png', bbox_inches='tight', pad_inches = 0)
+    fig.savefig(img_file+'/proliferacion_'+lnp + '.png', bbox_inches='tight', pad_inches = 0)
