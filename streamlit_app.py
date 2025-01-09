@@ -17,9 +17,9 @@ if not path.exists():
 st.markdown("""
     <style>
         .titulo {
-            background-color: lightblue;
+            background-color: #709acd;
             padding: 10px;
-            border-radius: 5px;color:#444444; font-size: 80px;text-align: center;
+            border-radius: 5px;color:#ffffff; font-size: 80px;text-align: center;
         }
     </style>
 """, unsafe_allow_html=True)
