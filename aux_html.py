@@ -17,14 +17,14 @@ def html_inicio():
 	solucion = ("<html>"
 				+"<head>"
 				+"<style>"
-				+"body {font-family: Helvetica, Arial, sans-serif; color: #444444;font-size: 11pt;margin-left: 15px;margin-right: 15px;}"
-				+'.titulo {font-size: 25pt;margin-top: 5px;margin-bottom: 5px;margin-left: 10px;margin-right: 10px;color: #417BCC;}'
-				+'.subtitulo {font-size: 15pt;margin-top:10px;margin-bottom: 0px;margin-left: 10px;margin-right: 10px;}'
+				+"body {font-family: Helvetica, Arial, sans-serif; color: #444444;font-size: 11pt;margin-left: 20px;margin-right: 2px;}"
+				+'.titulo {font-size: 20pt;margin-top: 5px;margin-bottom: 0px;margin-left: 10px;margin-right: 10px;color: #417BCC;}'
+				+'.subtitulo {font-size: 13pt;margin-top:5px;margin-bottom: 0px;margin-left: 10px;margin-right: 10px;}'
 				+'.imagen { display: block; margin-left: -15px; margin-right: auto; width: 50%;}'
 				+'.sp{ page-break-after: always;}'
-				+"table {table-layout: auto; width: 100%;background-color: #fefefe;border: 1px solid #444444;border-collapse: collapse;padding: 1px;}"
-				+"th { width: auto; background-color: #dddddd}"
-				+"td { width: auto}"
+				+"table { color: #444444; background-color: #fefefe; border: 1px solid #cccccc;border-collapse: collapse;  text-align: center;vertical-align: middle;padding-top: 4px;padding-bottom: 0px}"
+				+"th {  background-color: #dddddd}"
+				+"td {}"
 				+"</style>"
 				+"</head>"
 				+"<body>")
@@ -53,18 +53,15 @@ def escribir_html(sol, img_file, l_nlp):
         html += '<div class = "imagen"><img  src="'+img_file+ '/Valores_'+nlp+'.png" ></img></div>'
         html += '<div class = "imagen"><img  src="'+img_file+ '/proliferacion_'+nlp+'.png" ></img></div>'
 
-        html+= '<div class = "subtitulo">Valores medios</div>'
+        html+= '<div class = "subtitulo">VALORES MEDIOS</div>'
         df_print = df_medios.copy()
-        html +=  df_print.round(3).transpose().to_html()
-
-        html+= '<div class = "subtitulo">Diferencias medias</div>'
+        html +=  '<table'+df_print.round(3).transpose().to_html()[35:]
+        html+= '<div class = "subtitulo">DIFERENCIAS MEDIAS</div>'
         df_print = df_dif.copy()
-        html +=  df_print.round(3).transpose().to_html()
-
-        html+= '<div class = "subtitulo">Proliferación</div>'
+        html +=  '<table'+df_print.round(3).transpose().to_html()[35:]
+        html+= '<div class = "subtitulo">PROLIFERACIÓN</div>'
         df_print = df_dif_perc.copy()
-        html += df_print.round().transpose().to_html()
-
+        html +='<table'+ df_print.round().transpose().to_html()[35:]
     html +='</body>'
     html += '</html>'
     with open("file.html", "w") as file:

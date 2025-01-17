@@ -27,7 +27,7 @@ st.markdown("""
 
 #
 with st.container():
-    st.markdown('<div class="titulo"><b>ANÁLISIS DE EFICIENCIA</b></div>', unsafe_allow_html=True)
+    st.markdown('<div class="titulo"><b>ANÁLISIS IN VITRO</b></div>', unsafe_allow_html=True)
 
     _,c1,c2,_ = st.columns([0.3, 1.5,4,0.3], gap = 'large')
 
@@ -98,4 +98,4 @@ with st.container():
 
 with st.container():
     
-    st.markdown('<div class="titulo"><b>ANÁLISIS DE TOXICIDAD</b></div>', unsafe_allow_html=True)
+    st.markdown('<div class="titulo"><b>ANÁLISIS IN VIVO</b></div>', unsafe_allow_html=True)
