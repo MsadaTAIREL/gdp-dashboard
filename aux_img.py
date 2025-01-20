@@ -33,8 +33,7 @@ def img_1(fig, ax,sol, df0, lnp,img_file):
     fig.savefig(img_file+'/Valores_'+ lnp + '.png', bbox_inches='tight', pad_inches = 0)
 
 def img_2(fig, ax,sol, lnp,img_file, colores = {'r':'#bf775f', 'o':'#d3a65f',  'y':'#e6d26b','g':'#8bac86', 'c':'#98cacd','b':'#709acd', 'p':'#8176a7',  'gr': '#444444'}):
-    df_dif = sol['df_dif_'+lnp]
-    df_dif_perc = pd.DataFrame({k:df_dif[k] / df_dif['SCR'] *100 for k in df_dif.columns })
+    df_dif_perc = sol['df_dif_perc_'+lnp]
     ax.plot(df_dif_perc['CT'],   c = colores['o'],marker = '.', ms = 10)
     ax.plot(df_dif_perc['SCR'],  c = colores['r'],marker = '.', ms = 10)
     ax.plot(df_dif_perc['RRM1'], c = colores['b'],marker = '.', ms = 10)

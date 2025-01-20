@@ -41,8 +41,8 @@ with st.container():
             # preprocesado
             c_met, c_lnp, c_dia, c_id = preprocesado_columnas(df)
             resumen_series, df0 = preprocesado(df)
-            sol = bases_de_datos(resumen_series, df0)
             l_lnp = df.loc[~df[c_lnp].isna(),c_lnp].unique()
+            sol = bases_de_datos(resumen_series, df0, l_lnp)
             # Crear todas las imágenes
             dict_fig = {}
             for lnp in l_lnp:
@@ -61,7 +61,7 @@ with st.container():
             
             # Numero de para la descarga
             st.header('Descarga')
-            l_lnp_pdf = st.multiselect("LNP Informe",l_lnp)
+            l_lnp_pdf = st.multiselect("Seleccionar línea celular",l_lnp)
             escribir_html(sol, img_file, l_lnp_pdf)
             if l_lnp_pdf != []:
                 # Boton descarga pdf
@@ -75,8 +75,8 @@ with st.container():
 
 
     with c2:
-        st.header('LNP a mostrar')
-        lnp = c2.selectbox('Selecciona LNP',l_lnp)
+        st.header('Seleccionar línea celular')
+        lnp = c2.selectbox('',l_lnp)
         if uploaded_file is not None and lnp is not None:
             c2.subheader('Resultados ' + lnp)
             c21, c22 = st.columns([2,1], gap = 'large')
@@ -93,7 +93,7 @@ with st.container():
                 st.write('VALORES MEDIOS DIFERENCIADOS')
                 st.write(sol['df_dif_' + lnp].transpose())
                 st.write('PROLIFERACIÓN')
-                st.write(sol['df_dif_perc_' + lnp].transpose())
+                st.write(sol['df_dif_perc_' + lnp].transpose().round(2))
 
 
 with st.container():
