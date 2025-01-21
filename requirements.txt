@@ -3,3 +3,4 @@ pandas
 matplotlib>=3.3
 seaborn
 xhtml2pdf 
+numpy

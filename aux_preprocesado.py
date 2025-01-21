@@ -80,7 +80,7 @@ def procesar_datos_v(df, col_v, col_id, col_dia):
             for i in na_i:
                 if i ==0:# preguntar
                     s_v[s_v.index[0]] = 0
-                elif i ==len(s_v):
+                elif i ==len(s_v)-1:
                     s_v[s_v.index[i]] = s_v[s_v.index[i-1]]
                 else:
                     d0, d1, d2 = s_v.index[i-1:i+2]
@@ -92,3 +92,9 @@ def preprocesar_df_est(df_v, met):
     df_v = df_v.copy()
     df_aux = df_v.loc[[id.split('_')[0] == met for id in df_v.index]]
     return pd.DataFrame({met + '_min':df_aux.min(),met + '_max': df_aux.max(), met + '_mean':df_aux.mean()})
+def calcular_prol_vivo(df_vol):
+    df_control = preprocesar_df_est(df_vol, 'Control')
+    df_tratamiento = preprocesar_df_est(df_vol, 'Tratamiento')
+    prol = df_tratamiento['Tratamiento_mean'] / df_control['Control_mean'] * 100 
+    prol[df_control['Control_mean'] == 0] = 100
+    return prol
