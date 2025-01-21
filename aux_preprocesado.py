@@ -65,3 +65,30 @@ def bases_de_datos(resumen_series, df0, l_lnp):
         sol['df_dif_' + lnp] = df_dif   
         sol['df_dif_perc_' + lnp] = df_dif_perc
     return sol
+def procesar_datos_v(df, col_v, col_id, col_dia):
+    series = {}
+    for id in df[col_id].unique():
+        df_id = df.loc[df[col_id] == id]
+        s_v = pd.Series(list(df_id[col_v]), index = df_id[col_dia])
+        s_v.sort_index(inplace= True)
+        series[id] = s_v
+    df_v = pd.DataFrame(series).transpose()
+    for id in df[col_id].unique():
+        s_v = df_v.loc[id].copy()
+        if any(s_v.isna()):
+            na_i = np.arange(len(s_v))[s_v.isna()]
+            for i in na_i:
+                if i ==0:# preguntar
+                    s_v[s_v.index[0]] = 0
+                elif i ==len(s_v):
+                    s_v[s_v.index[i]] = s_v[s_v.index[i-1]]
+                else:
+                    d0, d1, d2 = s_v.index[i-1:i+2]
+                    s_v[d1] = s_v[d0] + (s_v[d2] - s_v[d0]) / (d2-d0) * (d1 - d0)
+            series[id] = s_v
+    df_v = pd.DataFrame(series).transpose()
+    return df_v
+def preprocesar_df_est(df_v, met):
+    df_v = df_v.copy()
+    df_aux = df_v.loc[[id.split('_')[0] == met for id in df_v.index]]
+    return pd.DataFrame({met + '_min':df_aux.min(),met + '_max': df_aux.max(), met + '_mean':df_aux.mean()})
