@@ -92,9 +92,9 @@ def preprocesar_df_est(df_v, met):
     df_v = df_v.copy()
     df_aux = df_v.loc[[id.split('_')[0] == met for id in df_v.index]]
     return pd.DataFrame({met + '_min':df_aux.min(),met + '_max': df_aux.max(), met + '_mean':df_aux.mean()})
-def calcular_prol_vivo(df_vol):
-    df_control = preprocesar_df_est(df_vol, 'Control')
-    df_tratamiento = preprocesar_df_est(df_vol, 'Tratamiento')
-    prol = df_tratamiento['Tratamiento_mean'] / df_control['Control_mean'] * 100 
-    prol[df_control['Control_mean'] == 0] = 100
+def calcular_prol_vivo(df_vol, control_vv, tratamiento_vv):
+    df_control = preprocesar_df_est(df_vol, control_vv)
+    df_tratamiento = preprocesar_df_est(df_vol, tratamiento_vv)
+    prol = df_tratamiento[tratamiento_vv + '_mean'] / df_control[control_vv + '_mean'] * 100 
+    prol[df_control[control_vv + '_mean'] == 0] = 100
     return prol

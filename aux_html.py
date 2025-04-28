@@ -20,6 +20,7 @@ def html_inicio():
 				+"body {font-family: Helvetica, Arial, sans-serif; color: #444444;font-size: 11pt;margin-left: 20px;margin-right: 2px;}"
 				+'.titulo {font-size: 20pt;margin-top: 5px;margin-bottom: 0px;margin-left: 10px;margin-right: 10px;color: #417BCC;}'
 				+'.subtitulo {font-size: 13pt;margin-top:5px;margin-bottom: 0px;margin-left: 10px;margin-right: 10px;}'
+				+'.subtitulo_sep {font-size: 13pt;margin-top:30px;margin-bottom: 0px;margin-left: 10px;margin-right: 10px;}'
 				+'.imagen { display: block; margin-left: -15px; margin-right: auto; width: 50%;}'
 				+'.sp{ page-break-after: always;}'
 				+"table { color: #444444; background-color: #fefefe; border: 1px solid #cccccc;border-collapse: collapse;  text-align: center;vertical-align: middle;padding-top: 4px;padding-bottom: 0px}"
@@ -68,6 +69,31 @@ def escribir_html(sol, img_file, l_nlp):
         file.write(html)
     # Generate PDF
     pdf_path = "example.pdf"
+    if convert_html_to_pdf(html, pdf_path):
+        print(f"PDF generated and saved at {pdf_path}")
+    else:
+        print("PDF generation failed")
+
+
+def escribir_html_vivo(img_file):
+    html = html_inicio()
+    html+= '<div class = "titulo"><b>GRÁFICAS </b></div>'
+    #
+    html+= '<div class = "subtitulo_sep">SERIES TEMPORALES PARA LAS DISTINTAS MEDIDAS </div>'
+    html += '<div class = "imagen"><img  src="'+img_file+ '/img3.png" ></img></div>'
+    #
+    html+= '<div class = "subtitulo_sep">SERIES TEMPORALES PARA EL VOLUMEN </div>'
+    html += '<div class = "imagen"><img  src="'+img_file+ '/img4.png" ></img></div>'
+    #
+    html+= '<div class = "subtitulo_sep">PROLIFERACIÓN </div>'
+    html += '<div class = "imagen"><img  src="'+img_file+ '/img5.png" ></img></div>'
+    #
+    html +='</body>'
+    html += '</html>'
+    with open("file.html", "w") as file:
+        file.write(html)
+    # Generate PDF
+    pdf_path = "informe_vivo.pdf"
     if convert_html_to_pdf(html, pdf_path):
         print(f"PDF generated and saved at {pdf_path}")
     else:
